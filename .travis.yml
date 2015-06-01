@@ -1,5 +1,9 @@
 sudo: required
 language: cpp
+
+env:
+  - JAVA_HOME=/usr/lib/jvm/java-8-oracle JAVA_OPTS="-Xmx3000m"
+
 compiler:
   - clang
 script:
