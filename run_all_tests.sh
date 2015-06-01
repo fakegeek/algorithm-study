@@ -4,4 +4,5 @@
 #
 
 BAZEL="build-tools/bazel/output/bazel"
-${BAZEL} fetch //java/... || return $?
+${BAZEL} fetch //main/... //test/... || exit $?
+${BAZEL} test //main/... //test/... || exit $?
