@@ -26,4 +26,51 @@ public class StackImplTest {
     stack.push(1);
     assertThat(stack.isEmpty()).isFalse();
   }
+
+  @Test
+  public void testPush() {
+    // use 100 because it's larger enough than INIT_SIZE.
+    assertThat(stack.size()).isEqualTo(0);
+    for (int i = 1; i <= 100; i++) {
+      stack.push(i);
+      assertThat(stack.size()).isEqualTo(i);
+    }
+  }
+
+  @Test
+  public void testPeek() {
+    assertThat(stack.peek()).isEqualTo(null);
+    assertThat(stack.peek()).isEqualTo(null);
+    stack.push(1);
+    stack.push(2);
+    for (int i = 0; i < 100; i++) {
+      assertThat(stack.peek()).isEqualTo(2);
+    }
+  }
+
+  @Test
+  public void testPoll() {
+    assertThat(stack.poll()).isEqualTo(null);
+    assertThat(stack.poll()).isEqualTo(null);
+    stack.push(1);
+    stack.push(2);
+    assertThat(stack.poll()).isEqualTo(2);
+    assertThat(stack.poll()).isEqualTo(1);
+    assertThat(stack.poll()).isEqualTo(null);
+  }
+
+  @Test
+  public void testAdjustSize() {
+    int run_times = 100000;
+    for (int i = 0; i < run_times; i++) {
+      assertThat(stack.size()).isEqualTo(i);
+      stack.push(i);
+    }
+    assertThat(stack.size()).isEqualTo(run_times);
+    for (int i = 0; i < run_times; i++) {
+      stack.poll();
+      assertThat(stack.size()).isEqualTo(run_times - 1 - i);
+    }
+    assertThat(stack.isEmpty()).isTrue();
+  }
 }

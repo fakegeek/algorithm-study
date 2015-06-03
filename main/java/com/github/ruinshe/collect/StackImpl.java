@@ -38,8 +38,8 @@ public class StackImpl<T> implements Stack<T> {
     if (isEmpty()) {
       return null;
     } else {
-      T element = (T) elements[size - 1];
-      adjustSize(size - 1);
+      T element = (T) elements[--size];
+      adjustSize(size);
       return element;
     }
   }
