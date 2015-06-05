@@ -13,11 +13,13 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public class StackImplTest {
 
+  private static final int TEST_MAX_SIZE = 128;
+
   private Stack<Integer> stack;
 
   @Before
   public void setUp() {
-    stack = new StackImpl<>();
+    stack = new StackImpl<>(TEST_MAX_SIZE);
   }
 
   @Test
@@ -61,16 +63,18 @@ public class StackImplTest {
 
   @Test
   public void testAdjustSize() {
-    int run_times = 100000;
+    int run_times = TEST_MAX_SIZE << 1;
     for (int i = 0; i < run_times; i++) {
-      assertThat(stack.size()).isEqualTo(i);
-      stack.push(i);
+      assertThat(stack.size()).isEqualTo(Math.min(i, TEST_MAX_SIZE));
+      assertThat(stack.push(i)).isEqualTo(i < TEST_MAX_SIZE);
     }
-    assertThat(stack.size()).isEqualTo(run_times);
-    for (int i = 0; i < run_times; i++) {
-      stack.poll();
-      assertThat(stack.size()).isEqualTo(run_times - 1 - i);
+    assertThat(stack.size()).isEqualTo(TEST_MAX_SIZE);
+    int size = stack.size();
+    while (!stack.isEmpty()) {
+      assertThat(stack.poll()).isEqualTo(--size);
+      assertThat(stack.size()).isEqualTo(size);
     }
+    assertThat(size).isEqualTo(0);
     assertThat(stack.isEmpty()).isTrue();
   }
 }
