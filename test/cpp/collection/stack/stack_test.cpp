@@ -5,7 +5,6 @@ using namespace algorithms;
 
 TEST(StackTest, TEST) {
 
-
   stack<int> test_stack;
 
   EXPECT_EQ(test_stack.isEmpty(), true);
@@ -21,7 +20,6 @@ TEST(StackTest, TEST) {
   EXPECT_EQ(test_stack.size(), 2);
   EXPECT_EQ(test_stack.poll(), 5);
   EXPECT_EQ(test_stack.poll(), 5);
-
 
   for(int i = 0; i < 15; i++) {
     test_stack.push(i);
