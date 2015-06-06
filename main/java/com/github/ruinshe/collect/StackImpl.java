@@ -5,12 +5,19 @@ package com.github.ruinshe.collect;
  */
 public class StackImpl<T> implements Stack<T> {
 
-  private static final int INIT_SIZE = 10;
+  private static final int INIT_SIZE = 16;
+  private static final int DEFAULT_MAX_SIZE = 1024;
 
+  private final int maxSize;
   private Object[] elements;
   private int size;
 
   public StackImpl() {
+    this(DEFAULT_MAX_SIZE);
+  }
+
+  public StackImpl(int maxSize) {
+    this.maxSize = maxSize;
     elements = new Object[INIT_SIZE];
     size = 0;
   }
@@ -55,8 +62,11 @@ public class StackImpl<T> implements Stack<T> {
   }
 
   private boolean adjustSize(int newSize) {
+    if (newSize > maxSize) {
+      return false;
+    }
     if (newSize > elements.length) {
-      Object[] newElements = new Object[elements.length << 1];
+      Object[] newElements = new Object[Math.min(maxSize, elements.length << 1)];
       System.arraycopy(elements, 0, newElements, 0, elements.length);
       elements = newElements;
     } else if (elements.length > INIT_SIZE && newSize < elements.length / 3) {
