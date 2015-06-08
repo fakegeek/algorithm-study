@@ -1,6 +1,5 @@
-cc_library(
+filegroup(
     name = "stack",
-    srcs = ["stack.cpp"],
-    hdrs = ["stack.h"],
+    srcs = ["stack.h"],
     visibility = ["//visibility:public"],
 )

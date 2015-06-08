@@ -1,10 +1,8 @@
 #include "gtest/gtest.h"
 #include "main/cpp/collection/stack/stack.h"
-
-using namespace algorithms;
+#include <iostream>
 
 TEST(StackTest, TEST) {
-
   stack<int> test_stack;
 
   EXPECT_EQ(test_stack.isEmpty(), true);
@@ -18,13 +16,14 @@ TEST(StackTest, TEST) {
   EXPECT_EQ(test_stack.peek(), 5);
   EXPECT_EQ(test_stack.poll(), 5);
   EXPECT_EQ(test_stack.size(), 2);
-  EXPECT_EQ(test_stack.poll(), 5);
-  EXPECT_EQ(test_stack.poll(), 5);
+  EXPECT_EQ(test_stack.poll(), 4);
+  EXPECT_EQ(test_stack.poll(), 3);
 
   for(int i = 0; i < 15; i++) {
     test_stack.push(i);
   }
 
   EXPECT_EQ(test_stack.size(), 15);
-
 }
+
+
