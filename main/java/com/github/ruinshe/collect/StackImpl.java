@@ -56,11 +56,6 @@ public class StackImpl<T> implements Stack<T> {
     return size;
   }
 
-  @Override
-  public boolean isEmpty() {
-    return size == 0;
-  }
-
   private boolean adjustSize(int newSize) {
     if (newSize > maxSize) {
       return false;
