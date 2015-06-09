@@ -29,12 +29,7 @@ namespace algorithms {
 using namespace algorithms;
 
 template <typename T>
-stack<T>::stack() {
-  init_size = 10;
-  current_size = 0;
-  storage = new T[init_size];
-  size_limit = init_size;
-}
+stack<T>::stack() : stack(10) {}
 
 template <typename T>
 stack<T>::stack(unsigned _init) {
@@ -85,10 +80,8 @@ template <typename T>
 bool stack<T>::increaseSize() {
   T *cp_to = new (std::nothrow) T[size_limit << 1];
   if(cp_to == NULL) return false;
-  for(unsigned i; i < current_size; i++) {
-    cp_to[i] = storage[i];
-  }
-  free(storage);
+  std::copy(storage, storage + current_size, cp_to);
+  delete(storage);
   storage = cp_to;
   return true;
 }
