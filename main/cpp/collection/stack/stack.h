@@ -14,6 +14,7 @@ namespace algorithms {
     unsigned current_size;
     unsigned size_limit;
     bool increaseSize();
+    void init(unsigned _size);
 
   public:
     stack();
@@ -29,11 +30,18 @@ namespace algorithms {
 using namespace algorithms;
 
 template <typename T>
-stack<T>::stack() : stack(10) {}
+stack<T>::stack() {
+  init(10);
+}
 
 template <typename T>
 stack<T>::stack(unsigned _init) {
-  init_size = _init;
+  init(_init);
+}
+
+template <typename T>
+void stack<T>::init(unsigned _size) {
+  init_size = _size;
   current_size = 0;
   storage = new T[init_size];
   size_limit = init_size;
