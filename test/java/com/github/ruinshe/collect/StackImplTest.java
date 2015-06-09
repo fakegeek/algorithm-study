@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 /**
- * Unit test cases for {@code StackImpl}.
+ * Unit test cases for {@link StackImpl}.
  */
 @RunWith(JUnit4.class)
 public class StackImplTest {
@@ -52,13 +52,13 @@ public class StackImplTest {
 
   @Test
   public void testPoll() {
-    assertThat(stack.poll()).isEqualTo(null);
-    assertThat(stack.poll()).isEqualTo(null);
+    assertThat(stack.poll()).isNull();
+    assertThat(stack.poll()).isNull();
     stack.push(1);
     stack.push(2);
     assertThat(stack.poll()).isEqualTo(2);
     assertThat(stack.poll()).isEqualTo(1);
-    assertThat(stack.poll()).isEqualTo(null);
+    assertThat(stack.poll()).isNull();
   }
 
   @Test
@@ -74,7 +74,7 @@ public class StackImplTest {
       assertThat(stack.poll()).isEqualTo(--size);
       assertThat(stack.size()).isEqualTo(size);
     }
-    assertThat(size).isEqualTo(0);
+    assertThat(stack.size()).isEqualTo(0);
     assertThat(stack.isEmpty()).isTrue();
   }
 }

@@ -9,6 +9,8 @@ public interface Stack<T> extends HasSize {
 
   /**
    * Pushes an {@code element} into the stack.
+   *
+   * @return pushes successfully or not.
    */
   boolean push(T element);
 
