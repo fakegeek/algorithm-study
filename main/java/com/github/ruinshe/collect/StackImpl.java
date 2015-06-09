@@ -56,11 +56,11 @@ public class StackImpl<T> implements Stack<T> {
     return size;
   }
 
-  @Override
-  public boolean isEmpty() {
-    return size == 0;
-  }
-
+  /**
+   * Adjusts the stack elements size to fit in {@code newSize}.
+   *
+   * @returnss the memory allocation is successful or not.
+   */
   private boolean adjustSize(int newSize) {
     if (newSize > maxSize) {
       return false;
