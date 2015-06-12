@@ -3,7 +3,7 @@ package com.github.ruinshe.collect;
 import com.github.ruinshe.collect.common.HasSize;
 
 /**
- * A ADT of <b>FIFO</b> queue data structure.
+ * An ADT of <b>FIFO</b> queue data structure.
  */
 public interface Queue<T> extends HasSize {
 
