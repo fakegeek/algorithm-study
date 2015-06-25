@@ -18,6 +18,7 @@ namespace algorithms {
 
   public:
     stack();
+    ~stack();
     stack(unsigned _init);
     bool push(T _el);
     T peek();
@@ -48,6 +49,11 @@ void stack<T>::init(unsigned _size) {
 }
 
 template <typename T>
+stack<T>::~stack() {
+  delete(storage);
+}
+
+template <typename T>
 bool stack<T>::push(T _el) {
   if(current_size == init_size) {
     if(!increaseSize()) return false;
@@ -59,7 +65,7 @@ bool stack<T>::push(T _el) {
 template <typename T>
 T stack<T>::peek() {
   if(current_size == 0) {
-    throw "stack empty";
+    throw std::runtime_error("stack empty");
   } else {
     return storage[current_size - 1];
   }
@@ -68,7 +74,7 @@ T stack<T>::peek() {
 template <typename T>
 T stack<T>::poll() {
   if(current_size == 0) {
-    throw "stack empty";
+    throw std::runtime_error("stack empty");
   } else {
     return storage[--current_size];
   }
