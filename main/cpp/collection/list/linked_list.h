@@ -3,6 +3,7 @@
 
 #include <new>
 #include <cstdlib>
+#include <stdexcept>
 
 namespace algorithms {
   template <typename T>
@@ -21,6 +22,7 @@ namespace algorithms {
 
   public:
     linked_list();
+    ~linked_list();
     T &front() const;
     T &back() const;
     unsigned size();
@@ -38,18 +40,30 @@ namespace algorithms {
   }
 
   template <typename T>
+  linked_list<T>::~linked_list() {
+    if(counter == 0) return;
+    tail_ptr = NULL;
+    node<T> *tmp = head_ptr;
+    while(head_ptr->next != NULL) {
+      tmp = head_ptr;
+      head_ptr = head_ptr->next;
+      delete(tmp);
+    }
+  }
+
+  template <typename T>
   T &linked_list<T>::front() const {
     if(head_ptr == NULL) {
-      throw "empty_list";
+      throw std::runtime_error("empty_list");
     }
 
     return head_ptr->value;
   }
 
   template <typename T>
-    T &linked_list<T>::back() const {
+  T &linked_list<T>::back() const {
     if(tail_ptr == NULL) {
-      throw "empty_list";
+      throw std::runtime_error("empty_list");
     }
 
     return tail_ptr->value;
@@ -61,9 +75,9 @@ namespace algorithms {
   }
 
   template <typename T>
-    void linked_list<T>::remove_front() {
+  void linked_list<T>::remove_front() {
     if(head_ptr == NULL) {
-      throw "empty_list";
+      throw std::runtime_error("empty_list");
     }
 
     node<T> *tmp = head_ptr->next;
@@ -82,9 +96,9 @@ namespace algorithms {
   }
 
   template <typename T>
-    void linked_list<T>::remove_back() {
+  void linked_list<T>::remove_back() {
     if(tail_ptr == NULL) {
-      throw "empty_list";
+      throw std::runtime_error("empty_list");
     }
 
     node<T> *tmp = tail_ptr->prev;
@@ -102,7 +116,7 @@ namespace algorithms {
   }
 
   template <typename T>
-    bool linked_list<T>::push_back(const T &_v) {
+  bool linked_list<T>::push_back(const T &_v) {
     node<T> *i_node = new (std::nothrow) node<T>;
     if(i_node == NULL) return false;
 
@@ -122,7 +136,7 @@ namespace algorithms {
   }
 
   template <typename T>
-    bool linked_list<T>::push_front(const T &_v) {
+  bool linked_list<T>::push_front(const T &_v) {
     node<T> *i_node = new (std::nothrow) node<T>;
     if(i_node == NULL) return false;
 
