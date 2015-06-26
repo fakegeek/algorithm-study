@@ -10,24 +10,22 @@ TEST(StackTest, TEST) {
 
   EXPECT_EQ(test_stack.isEmpty(), true);
 
-  int exc_count = 0;
 
   std::string s = std::string("stack empty");
   try {
     test_stack.peek();
+    FAIL();
   } catch (std::runtime_error e) {
     EXPECT_EQ(std::string(e.what()), s);
-    ++exc_count;
   }
 
   try {
     test_stack.poll();
+    FAIL();
   } catch (std::runtime_error e) {
     EXPECT_EQ(std::string(e.what()), s);
-    ++exc_count;
   }
 
-  EXPECT_EQ(exc_count, 2);
 
   EXPECT_EQ(test_stack.size(), 0);
   test_stack.push(3);
